@@ -31,6 +31,7 @@ services:
         WORKDIR: $WORKDIR
     environment:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      API_DOMAIN: "localhost:$FRONT_PORT"
     volumes:
       - "./api:/$WORKDIR"
     # サービスの依存関係を定義(起動の順番)
@@ -46,6 +47,7 @@ services:
       context: ./front
       args:
         WORKDIR: $WORKDIR
+        API_URL: "http://localhost:$API_PORT"
     # command ... コンテナで実行したいコマンドを定義
     # 開発環境用で実行するために指定
     command: yarn run dev
